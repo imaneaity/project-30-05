@@ -32,10 +32,13 @@ class PaymentType extends AbstractType
                 'required' =>true
             ])
 
-            ->add('address', AddressType::class)
+            ->add('address', AddressType::class,
+        [
+            'label' => 'test'
+        ])
 
             ->add('send', SubmitType::class,[
-                'label' => 'Envoyer'
+                'label' => 'Valider'
             ])
         ;
     }

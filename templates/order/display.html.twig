@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container mg-top">
+        <h1>Votre Commande</h1>
+
+        {{ form_start(form) }}
+        <div>
+            <h4> Votre Adresse</h4>
+            {{ form_widget(form.address) }}
+        </div>
+            <br>
+            <hr>
+            <br>
+
+        <h4> Les coordonées de votre carte</h4>
+        {{ form_end(form) }}
+ 
+    </div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Controller;
+
+use App\DTO\Payment;
+use App\Form\PaymentType;
+use App\Repository\OrderRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class OrderController extends AbstractController
+{
+    #[Route('/commander', name: 'app_order_display')]
+    public function display(Request $request, OrderRepository $repo): Response
+    {
+        //recup l'utilisateur
+        $user = $this->getUser();
+        //initialiser le paiement
+        $payment= new Payment();
+
+        //recup l'adresse de l'utilisateur pour la commande
+        $payment->address= $user->getAddress();
+
+        //création du formulaire
+        $form = $this->createForm(PaymentType::class, $payment);
+        $form->handleRequest($request);
+
+        //tester si le form est envoyé et est valid
+        if($form->isSubmitted() && $form->isValid())
+        {
+            //création de la commande
+            $order = new Order();
+            $order->setUser($user);
+            $order->setAddress($payment->address);
+
+            //transfrer les articles du panier vers la commande
+            foreach($user->getBasket()->getArticles() as $article)
+            {
+                $order->addArticle($article);
+            }
+
+            //sauvegarde dans la bd
+            $repo->save($order, true);
+            //redirection vers la page de validation
+            return $this->redirectToRoute('app_order_display');
+        }
+
+        return $this->render('order/display.html.twig', [
+            'form' => $form,
+        ]);
+    }
+}
