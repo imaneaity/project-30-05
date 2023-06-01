@@ -20,13 +20,13 @@
 
 
                     <div class="quantity-container">
-                        <a class="btn minus" href="#">
+                        <a class="btn minus" href="{{ path("app_basket_minus", {id: article.id}) }}">
                             <i class="fa-solid fa-square-minus"></i>
                         </a>
 
                         <p class="quantity">{{ article.quantity }}</p>
 
-                        <a class="btn plus" href="#">
+                        <a class="btn plus" href="{{ path("app_basket_plus", {id: article.id}) }}">
                             <i class="fa-solid fa-square-plus"></i>
                         </a>
                     </div>
