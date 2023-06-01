@@ -106,4 +106,15 @@ class Basket
 
         return $this;
     }
+
+    public function getTotal() : float
+    {
+        $total = 0.0;
+        foreach($this->articles as $article)
+        {
+            $total += $article->getTotal();//pour chaque article je récupére le total selon le prix et la quantité
+        }
+
+        return $total;
+    }
 }

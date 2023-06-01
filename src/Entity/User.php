@@ -55,6 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(){
         $this->setBasket(new Basket());
     }
+    
     public function getId(): ?int
     {
         return $this->id;
