@@ -37,7 +37,7 @@
                         <div class="price">
                             <p>Prix: {{article.total}}</p>
                         </div>
-                        <a class="btn" href="">
+                        <a class="btn" href="{{ path("app_basket_delete", {id: article.id}) }}">
                             <i class="fa-solid fa-trash"></i>
                             <span>Supprimer</span>
                         </a>

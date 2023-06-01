@@ -92,4 +92,23 @@ class BasketController extends AbstractController
         return $this->redirectToRoute("app_basket_display");
     }
 
+
+
+    #[Route('/mon-panier/{id}/supprimer', name: 'app_basket_delete')]
+    public function delete(Article $article, ArticleRepository $repository, BasketRepository $basketRepo): Response
+    {
+            //1. recup l'utilisateur puis son panier
+            $user= $this->getUser();
+            $basket= $user->getBasket();
+
+            //2.supprimer de l'entité basket l'article
+            $basket->removeArticle($article);
+
+            //màj du panier dans la bd
+            $basketRepo->save($basket, true);
+
+            //redirection vers le panier
+            return $this->redirectToRoute("app_basket_display");
+    }
+
 }
