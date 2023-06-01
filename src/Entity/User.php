@@ -52,6 +52,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Basket $basket = null;
 
+    public function __construct(){
+        $this->setBasket(new Basket());
+    }
     public function getId(): ?int
     {
         return $this->id;
