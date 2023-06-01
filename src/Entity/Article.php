@@ -15,13 +15,13 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\ManyToOne(inversedBy: 'articles', cascade:["persist"])]
     private ?Basket $basket = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\ManyToOne(inversedBy: 'articles', cascade:["persist"])]
     private ?Pizza $pizza = null;
 
     #[Timestampable(on: 'create')]

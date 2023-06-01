@@ -28,7 +28,7 @@ class Basket
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: Article::class)]
+    #[ORM\OneToMany(mappedBy: 'basket', targetEntity: Article::class, cascade:["persist"])]
     private Collection $articles;
 
     public function __construct()
