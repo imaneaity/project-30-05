@@ -94,6 +94,11 @@ header{
     align-items: stretch;
     align-self: center;
     width: 1024px;
+    
+}
+
+.mg-top{
+    margin-top: 80px;
 }
 
 .pizza-card{
@@ -176,4 +181,24 @@ header{
     padding: .8rem 1.8rem;
     text-decoration: none;
     font-weight: bold;
+}
+
+
+.pizza-card .quantity-container{
+    display: flex;
+    justify-content: center;
+    margin: .6rem;
+    align-items: center;
+}
+
+
+.pizza-card .quantity-container .btn{
+    margin: .6rem;
+}
+
+
+.pizza-card .quantity-container .quantity{
+    font-family: 'Lobster' , sans-serif;
+    font-size: 2.2rem;
+    margin: .6rem 3rem;
 }
