@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DTO\Payment;
+use App\Entity\Order;
 use App\Form\PaymentType;
 use App\Repository\OrderRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,14 +42,30 @@ class OrderController extends AbstractController
                 $order->addArticle($article);
             }
 
+            foreach($user->getBasket()->getArticles() as $article){
+                $user->getBasket()->removeArticle($article);
+            }
+
             //sauvegarde dans la bd
             $repo->save($order, true);
             //redirection vers la page de validation
-            return $this->redirectToRoute('app_order_display');
+            return $this->redirectToRoute('app_order_validate',[
+                'id' => $order->getId()
+            ]);
         }
 
         return $this->render('order/display.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+
+
+    #[Route('/commander/{id}/validation', name: 'app_order_validate')]
+    public function validate(Order $order): Response
+    {
+        return $this->render('order/validate.html.twig',[
+            'order' =>$order,
         ]);
     }
 }
