@@ -6,6 +6,7 @@ use App\DTO\Payment;
 use App\Entity\Order;
 use App\Form\PaymentType;
 use App\Repository\OrderRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OrderController extends AbstractController
 {
     #[Route('/commander', name: 'app_order_display')]
-    public function display(Request $request, OrderRepository $repo): Response
+    public function display(Request $request, OrderRepository $repo, ArticleRepository $articleRepo): Response
     {
         //recup l'utilisateur
         $user = $this->getUser();
@@ -42,8 +43,11 @@ class OrderController extends AbstractController
                 $order->addArticle($article);
             }
 
-            foreach($user->getBasket()->getArticles() as $article){
+            //supprimer l'article du panier
+            foreach($user->getBasket()->getArticles() as $article){ 
+               
                 $user->getBasket()->removeArticle($article);
+                $articleRepo->remove($article, true);
             }
 
             //sauvegarde dans la bd
