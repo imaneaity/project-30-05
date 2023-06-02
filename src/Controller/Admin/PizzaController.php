@@ -15,6 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[IsGranted('ROLE_ADMIN')]
 class PizzaController extends AbstractController
 {
+
+    #[Route('/admin', name: 'app_admin_pizza_home')]
+    public function home(): Response
+    {
+        return $this->render('admin/pizza/home.html.twig');
+    }
+    
     #[Route('/admin/pizza/nouvelle', name: 'app_admin_pizza_create')]
     public function create(Request $request, PizzaRepository $repo): Response
     {
