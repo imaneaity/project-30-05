@@ -1,0 +1,47 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a class="btn" href="{{ path('app_admin_pizza_create') }}">
+    <i class="fa-solid fa-pizza-slice"></i>
+    <span>Ajouter une pizza</span>
+</a>
+
+<div class="container">
+        <h1>Nos pizzas</h1>
+        {% for pizza in pizzas %}
+        <div class="pizza-card">
+            <div class="pizza-card-bg-image">
+                {% if pizza.imageUrl %}
+                        <img src="{{ pizza.imageUrl }}" alt="{{ pizza.name }}">
+                        <div class="pizza-card-bg-image-frame"></div>
+                {% endif %}
+            </div>
+            <h3>{{ pizza.name }}</h3>
+            <p class="description"> <i>{{ pizza.description }}</i> </p>
+
+            <div class="pizza-card-footer">
+                <div class="price">
+                    <p>Prix: {{pizza.price}}</p>
+                </div>
+                <a class="btn" href="{{ path("app_admin_pizza_create") }}">
+                    <i class="fa-solid fa-pencil"></i>
+                    <span>Modifier</span>
+                </a>
+
+
+                <a class="btn" href="{{ path("app_admin_pizza_create") }}">
+                    <i class="fa-solid fa-trash"></i>
+                    <span>Supprimer</span>
+                </a>
+            </div>
+
+        </div>
+    
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
