@@ -36,7 +36,11 @@
                     </a>
                     <a class="header-item" href="{{ path('app_basket_display') }}">
                         <i class="fa-solid fa-basket-shopping"></i>
-                    </a>                
+                    </a> 
+
+                    <a class="header-item" href="{{ path('app_user_myProfile')}}">
+                        <i class="fa-solid fa-user"></i>
+                    </a>               
             {% else %}
             
                     <a class="header-item" href="{{ path('app_login')}}"> 
@@ -44,11 +48,7 @@
                     </a>
 
             {% endif %}
-            
-
-            <a class="header-item" href="#user">
-                <i class="fa-solid fa-user"></i>
-            </a>
+        
 
         </div>
         

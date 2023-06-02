@@ -63,4 +63,29 @@ class UserController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
+
+
+    #[Route('/mon-profile', name: 'app_user_myProfile')]
+    public function myProfile(Request $request, UserRepository $repository): Response
+    {
+        //recup l'utilisateur connecté
+        $user = $this->getUser();
+        //créer le formulaire
+        $form = $this->createForm(RegistrationType::class, $user);
+        //remplissage du formulaire
+        $form->handleRequest($request);
+
+        //tester si le formulaire est valide et est envoyé
+        if($form->isSubmitted() && $form->isValid()){
+            //save dans la bd
+            $repository->save($user, true);
+        }
+
+        //affichage de la page HTML
+        return $this->render('user/myProfile.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
 }
